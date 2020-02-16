@@ -1,0 +1,65 @@
+
+/** Implements a graphical superMario. */
+class MoveAvatar {
+
+  field SuperMarioAvatar mario;
+  field Map map;
+  field int direction;
+
+  /** Constructs a new Avatar with a given location */
+  constructor MoveAvatar new() {
+          
+    let map = Map.new(0, (256-10), 15);
+    let mario = SuperMarioAvatar.new(0, (231));
+    return this;
+  }
+
+  /** Disposes this Avatar. */
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+
+
+  /** Runs the game: handles the user's inputs and moves the square accordingly */
+  method void run() {
+    var char key;  // the key currently pressed by the user
+    var char previousKey;
+    var boolean exit;
+    let exit = false;
+
+    while (~exit) {
+      // waits for a key to be pressed
+      while (key = 0) {
+        let key = Keyboard.keyPressed();
+        let direction = 0;
+        do Sys.wait(100);
+        do mario.moveMario(direction, 16, 0);
+      }
+
+      if (key = 81)  { let exit = true; }     // q key
+      if (key = 132) { let direction = 1;}   // right arrow
+      if (key = 130) { let direction = 2; }   // left arrow
+      if (key = 133) { let direction = 3; }   // down arrow
+      if (key = 131) { let direction = 4; }   // up arrow
+      
+
+      // waits for the key to be released
+      while (~(key = 0)) {
+
+        let previousKey = key; //Store key that the loop entered with.
+        do mario.moveMario(direction, 15, 0); //Move Mario with the demanded direction moveMario(int direction, int xRightLim, int xLeftLim)
+        do map.dynamicMap(mario.getLeftEdge(), mario.getBottomEdge(), direction); //dynamic Map moving with respect to mario movment
+        //do Output.printInt(mario.getLeftEdge());
+        //Waiting time for animation of movments
+        do Sys.wait(100);
+
+        //Go out of loop if keypressed is changed from the key that entered the loop
+        let key = Keyboard.keyPressed();
+        if (~(previousKey = key)){ let key=0; } 
+        
+      }
+    } // while
+    return;
+  }
+}

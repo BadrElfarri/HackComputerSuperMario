@@ -1,0 +1,147 @@
+class SuperMarioAvatar {
+
+	field int x, y, dy;
+	field int memAddress;
+	field int stateOfAvatar;
+	field bool jumpingOrFalling;
+	
+
+	/** Construct this Avatar with a given x and y coordinates. x 0-31 steps y 0-255 steps.*/
+	constructor SuperMarioAvatar new(int ax, int ay) {
+		let x = ax;
+		let y = ay;
+		let dy = 0;
+		//do calculateMemAddress(x, y); Marios head left corner is 0,0, Large Mario height is 30
+		let stateOfAvatar = 0;
+		let jumpingOrFalling = false;
+		do draw();
+		return this;
+	}
+
+	/** Disposes this Avatar. */
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	/** Draw starting Avatar. */
+	method void draw() {
+		do Graphics.largeMarioStanding(x, y);
+		return;
+	}
+	
+	/** x edge left side in pixels. */
+	method int getLeftEdge(){
+		return (x);
+	}
+	
+	/** x edge Right side in pixels. */
+	method int getRightEdgeInPixels(){
+		return ((x * 16) + 16);
+	}
+
+	/** y edge top side in pixels. */
+	method int gettopEdge(){
+		return (y - 30);
+	}
+
+	/** y edge bottom side in pixels. */
+	method int getBottomEdge(){
+		return y;
+	}
+
+	/** Moves Mario Avatar to the right/Left/Jump/knee by 3 pixels. */
+	method void moveMario(int direction, int xRightLim, int xLeftLim) {
+		do Graphics.largeMarioErase(x, y);
+		if (direction = 0) {
+			do draw();
+		}
+		//Move Right	
+		if (direction = 1) {
+			 
+			if (x<xRightLim){
+				let x = x + 1;
+			}
+			do runingGraphics(direction);
+		}
+		//Move Left
+		if (direction = 2) {
+			if (x>xLeftLim){
+				let x = x - 1;
+			}
+			do runingGraphics(direction);
+		}
+		//Duck
+		if (direction = 3) {
+			do Graphics.largeMarioDuck(x, y);
+		}
+		//Jump up
+		if (direction = 4) {
+			let jumpingOrFalling = true;
+		}
+		if (jumpingOrFalling = true) {
+			do Graphics.largeMarioErase(x, y);
+			do jumpFallMario();
+		}
+		
+		return;
+	}
+	
+	//Jump have to make own function for fall
+	method void jumpFallMario() {
+		
+		var int jumpPixelSteps;
+		var int jumpHeight;
+		
+		let jumpPixelSteps = 16;
+		let jumpHeight = 16*4;
+
+		let dy = dy + jumpPixelSteps;
+		
+		if ((dy<(jumpHeight))|(dy=(jumpHeight))) {
+			let y = y - jumpPixelSteps;
+		} 
+		else {
+			if ((dy<(jumpHeight*2))|(dy=(jumpHeight*2))) {
+			let y = y + jumpPixelSteps;
+			}
+			else {
+				let jumpingOrFalling = false;
+				let dy = 0;
+			}
+		}
+		do Graphics.largeMarioJump(x, y);
+
+		return;
+
+	}
+
+	//runing graphics
+	method void runingGraphics(int direction){
+
+		let stateOfAvatar = stateOfAvatar + 1;
+
+		if (stateOfAvatar = 1){
+			do Graphics.largeMarioMovingLegsMiddle(direction, x, y);
+			return;
+		}
+		if (stateOfAvatar = 2){
+			do Graphics.largeMarioMovingLegsInFront(direction, x, y);
+			return;
+		}
+		if (stateOfAvatar = 3){
+				do Graphics.largeMarioMovingLegsMiddle(direction, x, y);
+				return;
+		}
+		if (stateOfAvatar = 4){
+			do Graphics.largeMarioMovingLegsBack(direction, x, y);
+			let stateOfAvatar = 0;
+			return;
+		}
+		return;
+	}
+
+
+
+
+}

@@ -1,0 +1,468 @@
+class Graphics {
+    
+    /** All Graphics for the game are stored here. x and y axes is (0,0) at bottom left corner of the graphic. x range is 0-31 steps y is 0-255 steps. */
+    
+    /** convert x and y coordinates to memory adress location */
+    function int calculateMemAddress(int x, int y) {
+		return (16384 + x + (32 * y));
+	}
+
+	/** Large Mario have a height of 30 standing tall 3 different graphics of movment to the right and mirrored graphics for movment to the left */
+    
+    //Large super Mario starts here
+	function void largeMarioMovingLegsInFront(int direction, int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-30));
+		if (direction = 1){
+			do Memory.poke(memAddress+0, 1984);		
+			do Memory.poke(memAddress+32, 2032);	
+			do Memory.poke(memAddress+64, 2040);	
+			do Memory.poke(memAddress+96, 16376);	
+			do Memory.poke(memAddress+128, 2360);	
+			do Memory.poke(memAddress+160, 15158);	
+			do Memory.poke(memAddress+192, 16486);	
+			do Memory.poke(memAddress+224, 17511);	
+			do Memory.poke(memAddress+256, 16143);	
+			do Memory.poke(memAddress+288, 7704);	
+			do Memory.poke(memAddress+320, 736);	
+			do Memory.poke(memAddress+352, 18424);	
+			do Memory.poke(memAddress+384, -5512);	
+			do Memory.poke(memAddress+416, -2820);	
+			do Memory.poke(memAddress+448, -4922);	
+			do Memory.poke(memAddress+480, -7038);  //
+			do Memory.poke(memAddress+512, 25698);  //01100100 01100010
+			do Memory.poke(memAddress+544, 13361);  //00110100 00110001
+			do Memory.poke(memAddress+576, 4105);   //00010000 00001001
+			do Memory.poke(memAddress+608, -28641); //10010000 00011111
+			do Memory.poke(memAddress+640, -12257); //11010000 00011111
+			do Memory.poke(memAddress+672, -2033);  //11111000 00001111	mirrored 11110000 00011111
+			do Memory.poke(memAddress+704, -2034);  //mirrored  01110000 00011111
+			do Memory.poke(memAddress+736, -2024);  //mirrored 00011000 00011111
+			do Memory.poke(memAddress+768, -220);	//mirrored 00100100 11111111
+			do Memory.poke(memAddress+800, -1841);	//mirrored 11110011 00011111
+			do Memory.poke(memAddress+832, 63); 	//mirrored 11111100 00000000
+			do Memory.poke(memAddress+864, 14); 	//mirrored 01110000 00000000
+			do Memory.poke(memAddress+896, 14); 	//mirrored 01110000 00000000
+			do Memory.poke(memAddress+928, 28); 	//mirrored 00111000 00000000
+		} 
+		else {
+			do Memory.poke(memAddress+0, 992);		
+			do Memory.poke(memAddress+32, 4064);	
+			do Memory.poke(memAddress+64, 8160);	
+			do Memory.poke(memAddress+96, 8188);	
+			do Memory.poke(memAddress+128, 7312);	
+			do Memory.poke(memAddress+160, 27868);	
+			do Memory.poke(memAddress+192, 26114);	
+			do Memory.poke(memAddress+224, -6622);	
+			do Memory.poke(memAddress+256, -3844);	
+			do Memory.poke(memAddress+288, 6264);	
+			do Memory.poke(memAddress+320, 1856);	
+			do Memory.poke(memAddress+352, 8162);	
+			do Memory.poke(memAddress+384, 7767);	
+			do Memory.poke(memAddress+416, 16175);	
+			do Memory.poke(memAddress+448, 25399);	
+			do Memory.poke(memAddress+480, 16679);
+			do Memory.poke(memAddress+512, 17958);  
+			do Memory.poke(memAddress+544, -29652);  
+			do Memory.poke(memAddress+576, -28664);   
+			do Memory.poke(memAddress+608, -2039); 
+			do Memory.poke(memAddress+640, -2037); 
+			do Memory.poke(memAddress+672, -4065);
+			do Memory.poke(memAddress+704, 28703);  
+			do Memory.poke(memAddress+736, 6175);  
+			do Memory.poke(memAddress+768, 9471);	
+			do Memory.poke(memAddress+800, -3297);	
+			do Memory.poke(memAddress+832, -1024); 	
+			do Memory.poke(memAddress+864, 28672); 	
+			do Memory.poke(memAddress+896, 28672); 	
+			do Memory.poke(memAddress+928, 14336); 
+		}
+
+		return;
+	}
+
+	function void largeMarioMovingLegsMiddle (int direction, int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-30));
+
+		if (direction = 1){
+			do Memory.poke(memAddress+0, 1984);
+			do Memory.poke(memAddress+32, 2032);
+			do Memory.poke(memAddress+64, 2040);
+			do Memory.poke(memAddress+96, 16376);
+			do Memory.poke(memAddress+128, 2360);
+			do Memory.poke(memAddress+160, 15158);
+			do Memory.poke(memAddress+192, 16486);
+			do Memory.poke(memAddress+224, 17511);
+			do Memory.poke(memAddress+256, 16143);
+			do Memory.poke(memAddress+288, 7704);
+			do Memory.poke(memAddress+320, 14360);
+			do Memory.poke(memAddress+352, 2032);
+			do Memory.poke(memAddress+384, 3176);
+			do Memory.poke(memAddress+416, 2548);
+			do Memory.poke(memAddress+448, 6420);
+			do Memory.poke(memAddress+480, 4372);
+			do Memory.poke(memAddress+512, 7444);
+			do Memory.poke(memAddress+544, 7700);
+			do Memory.poke(memAddress+576, 15892);
+			do Memory.poke(memAddress+608, 32292);
+			do Memory.poke(memAddress+640, 20420);
+			do Memory.poke(memAddress+672, 16392);
+			do Memory.poke(memAddress+704, 12176);
+			do Memory.poke(memAddress+736, 16176);
+			do Memory.poke(memAddress+768, 3872);
+			do Memory.poke(memAddress+800, 7200);
+			do Memory.poke(memAddress+832, 7136);
+			do Memory.poke(memAddress+864, 1008);
+			do Memory.poke(memAddress+896, 4080);
+			do Memory.poke(memAddress+928, 4032);
+		}
+		else {
+			do Memory.poke(memAddress+0, 992);
+			do Memory.poke(memAddress+32, 4064);
+			do Memory.poke(memAddress+64, 8160);
+			do Memory.poke(memAddress+96, 8188);
+			do Memory.poke(memAddress+128, 7312);
+			do Memory.poke(memAddress+160, 27868);
+			do Memory.poke(memAddress+192, 26114);
+			do Memory.poke(memAddress+224, -6622);
+			do Memory.poke(memAddress+256, -3844);
+			do Memory.poke(memAddress+288, 6264);
+			do Memory.poke(memAddress+320, 6172);
+			do Memory.poke(memAddress+352, 4064);
+			do Memory.poke(memAddress+384, 5680);
+			do Memory.poke(memAddress+416, 12176);
+			do Memory.poke(memAddress+448, 10392);
+			do Memory.poke(memAddress+480, 10376);
+			do Memory.poke(memAddress+512, 10424);
+			do Memory.poke(memAddress+544, 10360);
+			do Memory.poke(memAddress+576, 10364);
+			do Memory.poke(memAddress+608, 9342);
+			do Memory.poke(memAddress+640, 9202);
+			do Memory.poke(memAddress+672, 4098);
+			do Memory.poke(memAddress+704, 2548);
+			do Memory.poke(memAddress+736, 3324);
+			do Memory.poke(memAddress+768, 1264);
+			do Memory.poke(memAddress+800, 1080);
+			do Memory.poke(memAddress+832, 2008);
+			do Memory.poke(memAddress+864, 4032);
+			do Memory.poke(memAddress+896, 4080);
+			do Memory.poke(memAddress+928, 1008);
+		}
+	 	return;
+	}
+
+	function void largeMarioMovingLegsBack(int direction, int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-30));
+
+		if (direction = 1){
+			do Memory.poke(memAddress+0, 1984);
+			do Memory.poke(memAddress+32, 2032);
+			do Memory.poke(memAddress+64, 2040);
+			do Memory.poke(memAddress+96, 16376);
+			do Memory.poke(memAddress+128, 2360);
+			do Memory.poke(memAddress+160, 15158);
+			do Memory.poke(memAddress+192, 16486);
+			do Memory.poke(memAddress+224, 17511);
+			do Memory.poke(memAddress+256, 16143);
+			do Memory.poke(memAddress+288, 7704);
+			do Memory.poke(memAddress+320, 8184);
+			do Memory.poke(memAddress+352, 1020);
+			do Memory.poke(memAddress+384, 258);
+			do Memory.poke(memAddress+416, 762);
+			do Memory.poke(memAddress+448, 7435);
+			do Memory.poke(memAddress+480, 30729);
+			do Memory.poke(memAddress+512, 28691);
+			do Memory.poke(memAddress+544, 28722);
+			do Memory.poke(memAddress+576, 30962);
+			do Memory.poke(memAddress+608, 4034);
+			do Memory.poke(memAddress+640, 2946);
+			do Memory.poke(memAddress+672, 2050);
+			do Memory.poke(memAddress+704, 2063);
+			do Memory.poke(memAddress+736, 6607);
+			do Memory.poke(memAddress+768, 6527);
+			do Memory.poke(memAddress+800, 2319);
+			do Memory.poke(memAddress+832, 3843);
+			do Memory.poke(memAddress+864, 3843);
+			do Memory.poke(memAddress+896, 16128);
+			do Memory.poke(memAddress+928, 16128);
+		}
+		else {
+			do Memory.poke(memAddress+0, 992);
+			do Memory.poke(memAddress+32, 4064);
+			do Memory.poke(memAddress+64, 8160);
+			do Memory.poke(memAddress+96, 8188);
+			do Memory.poke(memAddress+128, 7312);
+			do Memory.poke(memAddress+160, 27868);
+			do Memory.poke(memAddress+192, 26114);
+			do Memory.poke(memAddress+224, -6622);
+			do Memory.poke(memAddress+256, -3844);
+			do Memory.poke(memAddress+288, 6264);
+			do Memory.poke(memAddress+320, 8184);
+			do Memory.poke(memAddress+352, 16320);
+			do Memory.poke(memAddress+384, 16512);
+			do Memory.poke(memAddress+416, 24384);
+			do Memory.poke(memAddress+448, -12104);
+			do Memory.poke(memAddress+480, -28642);
+			do Memory.poke(memAddress+512, -14322);
+			do Memory.poke(memAddress+544, 19470);
+			do Memory.poke(memAddress+576, 20254);
+			do Memory.poke(memAddress+608, 17392);
+			do Memory.poke(memAddress+640, 16848);
+			do Memory.poke(memAddress+672, 16400);
+			do Memory.poke(memAddress+704, -4080);
+			do Memory.poke(memAddress+736, -3176);
+			do Memory.poke(memAddress+768, -360);
+			do Memory.poke(memAddress+800, -3952);
+			do Memory.poke(memAddress+832, -16144);
+			do Memory.poke(memAddress+864, -16144);
+			do Memory.poke(memAddress+896, 252);
+			do Memory.poke(memAddress+928, 252);
+		}
+		return;
+	}
+
+    /** large superMario Standing still */
+	function void largeMarioStanding(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-30));
+		
+        do Memory.poke(memAddress+0, 1984);
+		do Memory.poke(memAddress+32, 2032);
+		do Memory.poke(memAddress+64, 2040);
+		do Memory.poke(memAddress+96, 16376);
+		do Memory.poke(memAddress+128, 2360);
+		do Memory.poke(memAddress+160, 15158);
+		do Memory.poke(memAddress+192, 16486);
+		do Memory.poke(memAddress+224, 17511);
+		do Memory.poke(memAddress+256, 16143);
+		do Memory.poke(memAddress+288, 7704);
+		do Memory.poke(memAddress+320, 8184);
+		do Memory.poke(memAddress+352, 3024);
+		do Memory.poke(memAddress+384, 7128);
+		do Memory.poke(memAddress+416, 15324);
+		do Memory.poke(memAddress+448, 21450);
+		do Memory.poke(memAddress+480, 21450);
+		do Memory.poke(memAddress+512, -27703);
+		do Memory.poke(memAddress+544, -28663);
+		do Memory.poke(memAddress+576, -27607);
+		do Memory.poke(memAddress+608, -4081);
+		do Memory.poke(memAddress+640, -4081);
+		do Memory.poke(memAddress+672, 24582);
+		do Memory.poke(memAddress+704, 9156);
+		do Memory.poke(memAddress+736, 16962);
+		do Memory.poke(memAddress+768, 17442);
+		do Memory.poke(memAddress+800, 31806);
+		do Memory.poke(memAddress+832, 15420);
+		do Memory.poke(memAddress+864, 15420);
+		do Memory.poke(memAddress+896, -961);
+		do Memory.poke(memAddress+928, -961);
+		return;
+	}
+
+    /** large superMario jumping graphic */
+	function void largeMarioJump(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-28));
+		
+        do Memory.poke(memAddress+0, 28672);
+		do Memory.poke(memAddress+32, -10240);
+		do Memory.poke(memAddress+64, -64);
+		do Memory.poke(memAddress+96, -16);
+		do Memory.poke(memAddress+128, -28680);
+		do Memory.poke(memAddress+160, -16392);
+		do Memory.poke(memAddress+192, -28104);
+		do Memory.poke(memAddress+224, -19932);
+		do Memory.poke(memAddress+256, -14236);
+		do Memory.poke(memAddress+288, 32614);
+		do Memory.poke(memAddress+320, 24094);
+		do Memory.poke(memAddress+352, 31608);
+		do Memory.poke(memAddress+384, 31358);
+		do Memory.poke(memAddress+416, 14079);
+		do Memory.poke(memAddress+448, 7399);
+		do Memory.poke(memAddress+480, 6211);
+		do Memory.poke(memAddress+512, 6207);
+		do Memory.poke(memAddress+544, 4127);
+		do Memory.poke(memAddress+576, -28147);
+		do Memory.poke(memAddress+608, -12282);
+		do Memory.poke(memAddress+640, -2040);
+		do Memory.poke(memAddress+672, -2024);
+		do Memory.poke(memAddress+704, -25);
+		do Memory.poke(memAddress+736, -889);
+		do Memory.poke(memAddress+768, 135);
+		do Memory.poke(memAddress+800, 127);
+		do Memory.poke(memAddress+832, 3);
+		do Memory.poke(memAddress+864, 1);
+		return;
+	}
+
+    /** large superMario ducking graphic */
+    function void largeMarioDuck(int x, int y) {
+    var int memAddress;
+    let memAddress = Graphics.calculateMemAddress(x, (y-20));
+    
+	do Memory.poke(memAddress+0, 3968);
+	do Memory.poke(memAddress+32, 4064);
+	do Memory.poke(memAddress+64, 32752);
+	do Memory.poke(memAddress+96, 4720);
+	do Memory.poke(memAddress+128, 26184);
+	do Memory.poke(memAddress+160, -30580);
+	do Memory.poke(memAddress+192, 32268);
+	do Memory.poke(memAddress+224, 31764);
+	do Memory.poke(memAddress+256, 21358);
+	do Memory.poke(memAddress+288, 20521);
+	do Memory.poke(memAddress+320, 24553);
+	do Memory.poke(memAddress+352, -12311);
+	do Memory.poke(memAddress+384, -22583);
+	do Memory.poke(memAddress+416, -28647);
+	do Memory.poke(memAddress+448, -17347);
+	do Memory.poke(memAddress+480, -17347);
+    do Memory.poke(memAddress+512, -1);
+    do Memory.poke(memAddress+544, 30750);
+	do Memory.poke(memAddress+576, 15420);
+	do Memory.poke(memAddress+608, -961);
+	return;
+    }
+
+     /** Erase superMario graphic */
+	function void largeMarioErase(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-30));
+		
+        do Memory.poke(memAddress+0, 0);
+		do Memory.poke(memAddress+32, 0);
+		do Memory.poke(memAddress+64, 0);
+		do Memory.poke(memAddress+96, 0);
+		do Memory.poke(memAddress+128, 0);
+		do Memory.poke(memAddress+160, 0);
+		do Memory.poke(memAddress+192, 0);
+		do Memory.poke(memAddress+224, 0);
+		do Memory.poke(memAddress+256, 0);
+		do Memory.poke(memAddress+288, 0);
+		do Memory.poke(memAddress+320, 0);
+		do Memory.poke(memAddress+352, 0);
+		do Memory.poke(memAddress+384, 0);
+		do Memory.poke(memAddress+416, 0);
+		do Memory.poke(memAddress+448, 0);
+		do Memory.poke(memAddress+480, 0);
+		do Memory.poke(memAddress+512, 0);
+		do Memory.poke(memAddress+544, 0);
+		do Memory.poke(memAddress+576, 0);
+		do Memory.poke(memAddress+608, 0);
+		do Memory.poke(memAddress+640, 0);
+		do Memory.poke(memAddress+672, 0);
+		do Memory.poke(memAddress+704, 0);
+		do Memory.poke(memAddress+736, 0);
+		do Memory.poke(memAddress+768, 0);
+		do Memory.poke(memAddress+800, 0);
+		do Memory.poke(memAddress+832, 0);
+		do Memory.poke(memAddress+864, 0);
+		do Memory.poke(memAddress+896, 0);
+		do Memory.poke(memAddress+928, 0);
+		return;
+	}
+    /** Erase 16 y height graphic */
+	function void smallErase(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-16));
+		
+        do Memory.poke(memAddress+0, 0);
+		do Memory.poke(memAddress+32, 0);
+		do Memory.poke(memAddress+64, 0);
+		do Memory.poke(memAddress+96, 0);
+		do Memory.poke(memAddress+128, 0);
+		do Memory.poke(memAddress+160, 0);
+		do Memory.poke(memAddress+192, 0);
+		do Memory.poke(memAddress+224, 0);
+		do Memory.poke(memAddress+256, 0);
+		do Memory.poke(memAddress+288, 0);
+		do Memory.poke(memAddress+320, 0);
+		do Memory.poke(memAddress+352, 0);
+		do Memory.poke(memAddress+384, 0);
+		do Memory.poke(memAddress+416, 0);
+		do Memory.poke(memAddress+448, 0);
+		do Memory.poke(memAddress+480, 0);
+		return;
+	}
+
+    //Large SuperMario Ends here
+
+    //Small superMario
+	function void Standing(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-16));
+	
+		do Memory.poke(memAddress+0, 1008);
+	 	do Memory.poke(memAddress+32, 8184);
+	 	do Memory.poke(memAddress+64, 1400);
+	 	do Memory.poke(memAddress+96, 15636);
+	 	do Memory.poke(memAddress+128, 16948);
+	 	do Memory.poke(memAddress+160, 16140);
+	 	do Memory.poke(memAddress+192, 5552);
+	 	do Memory.poke(memAddress+224, 5544);
+	 	do Memory.poke(memAddress+256, 9636);
+	 	do Memory.poke(memAddress+288, 17442);
+	 	do Memory.poke(memAddress+320, 18450);
+	 	do Memory.poke(memAddress+352, 28686);
+	 	do Memory.poke(memAddress+384, 24966);
+	 	do Memory.poke(memAddress+416, 4680);
+	 	do Memory.poke(memAddress+448, 15420);
+	 	do Memory.poke(memAddress+480, 31806);
+
+		return;
+	}
+
+    //Bricks in the game starts here
+
+    function void floorBrik(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-15));
+
+	    do Memory.poke(memAddress+0, 31742);
+	    do Memory.poke(memAddress+32, -31231);
+	    do Memory.poke(memAddress+64, -18691);
+	    do Memory.poke(memAddress+96, -18691);
+	    do Memory.poke(memAddress+128, -28931);
+	    do Memory.poke(memAddress+160, 32509);
+	    do Memory.poke(memAddress+192, -259);
+	    do Memory.poke(memAddress+224, -30979);
+	    do Memory.poke(memAddress+256, -18695);
+	    do Memory.poke(memAddress+288, -17545);
+	    do Memory.poke(memAddress+320, -17651);
+	    do Memory.poke(memAddress+352, -16899);
+	    do Memory.poke(memAddress+384, -16911);
+	    do Memory.poke(memAddress+416, -32383);
+	    do Memory.poke(memAddress+448, 32638);
+		return;
+	}
+
+    function void questionBrik(int x, int y) {
+        var int memAddress;
+        let memAddress = Graphics.calculateMemAddress(x, (y-16));
+
+	    do Memory.poke(memAddress+0, -2);
+	    do Memory.poke(memAddress+32, -28703);
+	    do Memory.poke(memAddress+64, -20451);
+	    do Memory.poke(memAddress+96, -18451);
+	    do Memory.poke(memAddress+128, -4107);
+	    do Memory.poke(memAddress+160, -8971);
+	    do Memory.poke(memAddress+192, -8971);
+	    do Memory.poke(memAddress+224, -8467);
+	    do Memory.poke(memAddress+256, -8419);
+	    do Memory.poke(memAddress+288, -14531);
+	    do Memory.poke(memAddress+320, -2499);
+	    do Memory.poke(memAddress+352, -19587);
+	    do Memory.poke(memAddress+384, -18563);
+	    do Memory.poke(memAddress+416, -18691);
+	    do Memory.poke(memAddress+448, -1);
+        do Memory.poke(memAddress+480, -1);
+		return;
+	}
+
+    //Briks end here
+
+
+
+
+}

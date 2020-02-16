@@ -1,0 +1,124 @@
+class Map {
+
+	field int x, y;
+    field int displayFrameProceed; //Frame start at x = 0 to fr example x = 15 . When Mario is at x=15 the map "start moving".
+    field int displayFrame; //Position of view frame, the frame starts at 0 to 31 (what is visible in the display), when reach the displayFrameProceed. The display "moves to the right" with Marios movment. This stores the screen upper value the screens width is 31
+    field int marioXPosition; //marioXPosition inside the display frame
+    field int marioYPosition; //marioYPosition inside the display frame
+    field int lastMarioXPosition;
+    field bool marioMovingRight;
+    field bool marioMovingLeft;
+    field int inhibit;
+
+	/** Construct this Avatar with a given x and y coordinates. x 0-31 steps y 0-255 steps.*/
+	constructor Map new(int ax, int ay, int adisplayFrameProceed) {
+		let x = ax;
+		let y = ay;
+        let displayFrameProceed = adisplayFrameProceed;
+        let displayFrame = 31;
+        let lastMarioXPosition = 0;
+        let inhibit = 0;
+		do draw();
+		return this;
+	}
+    
+    /** Disposes this Map. */
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+    
+    method void draw() {
+        var int floorLength;
+        let floorLength = 32;
+
+        while (x < floorLength){
+		do Graphics.floorBrik(x, y);
+        let x = x + 1;
+        }
+		return;
+	}
+
+    method int getInhibit(){
+        return inhibit;
+    }
+
+    method bool inhibitMoveRight(int marioPosition){
+        if (marioPosition = displayFrameProceed) {return true;}
+        return false;
+    }
+
+    method bool inhibitMoveLeft(int marioPosition){
+        if (marioPosition = 0) {return true;}
+        return false;
+    }
+
+
+    method void dynamicMap(int AmarioXPosition, int AmarioYPosition, int direction) {
+
+        //Keep track of Mario position and keep track if Mario is moving right or left
+        let marioXPosition = AmarioXPosition;
+        let marioYPosition = AmarioYPosition;
+
+        if ( (marioXPosition>lastMarioXPosition)&(marioXPosition = displayFrameProceed) | ((direction = 1)&(marioXPosition = displayFrameProceed)) ){
+            let displayFrame = displayFrame + 1;
+            let marioMovingRight = true;
+            let marioMovingLeft = false;
+        } 
+        else {
+            if ((marioXPosition<lastMarioXPosition)&(marioXPosition = displayFrameProceed)){
+                let displayFrame = displayFrame - 1;            
+                let marioMovingRight = false;
+                let marioMovingLeft = true;
+            }
+            else {
+                let marioMovingRight = false;
+                let marioMovingLeft = false;
+            }
+        }
+        //Debug
+        //do Output.printInt(marioXPosition);
+        //do Output.printInt(lastMarioXPosition);
+        //do Output.printInt(displayFrame);
+        //do Output.printInt(inhibit);
+
+        let lastMarioXPosition = marioXPosition;
+        //end of mario position tracking
+
+        //do Map.drawQuestionBrik(32, 230, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(32, 180, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(33, 180, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(34, 180, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(36, 140, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(39, 120, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(40, 120, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(41, 120, displayFrame, marioXPosition, marioYPosition);
+
+        do Map.drawQuestionBrik(45, 150, displayFrame, marioXPosition, marioYPosition);
+        do Map.drawQuestionBrik(49, 160, displayFrame, marioXPosition, marioYPosition);
+
+        //21 steps then a box appers and moves to the left 31 times. 
+
+		return;
+	}
+
+    //Function used to draw each brick and object in the map.
+    function void drawQuestionBrik(int positionOfObjectInTheMapX, int positionOfObjectInTheMapY, int displayFrame, int marioXPosition, int marioYPosition){
+        var int dx;
+        let dx = positionOfObjectInTheMapX-displayFrame;
+        if ((displayFrame > (positionOfObjectInTheMapX-1)) & (displayFrame < (positionOfObjectInTheMapX+32))){
+            do Graphics.smallErase((dx+32), positionOfObjectInTheMapY); 
+            do Graphics.questionBrik((dx+31), positionOfObjectInTheMapY); 
+        }        
+        else {
+            if (Math.abs(dx)=32) {do Graphics.smallErase(0, positionOfObjectInTheMapY);}
+        }
+        return;
+    }
+
+    function int xObjectCoordinate(){
+        return 1;
+    }
+
+
+}
